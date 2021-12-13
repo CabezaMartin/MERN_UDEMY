@@ -10,6 +10,7 @@ const app = express();
 const userRouters = require('./routers/user');
 const authRouters = require('./routers/auth');
 const menuRouters = require('./routers/menu');
+const nbaRouters = require('./routers/apiNba');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -29,7 +30,8 @@ app.use((req, res, next) => {
 
 app.use(`/api/${API_VERSION}`, userRouters);
 app.use(`/api/${API_VERSION}`, authRouters);
-app.use(`/api/${API_VERSION}`, menuRouters);
+1
+app.use(`/api/${API_VERSION}`, nbaRouters);
 
 //exportar app en node
 module.exports = app;

@@ -17,6 +17,9 @@
         "jwt-simple": "^0.5.6",
         "moment": "^2.29.1",
         "mongoose": "^5.12.11",
-        "nodemon": "^2.0.7"
+        "nba": "^4.15.0",
+        "nba-api-client": "^1.1.1",
+        "nodemon": "^2.0.7",
+        "react-sortable": "^2.0.0"
     }
 }

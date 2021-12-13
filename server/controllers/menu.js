@@ -24,7 +24,6 @@ function addMenu(req, res) {
                 };
             }
         });
-
     }
 }
 
@@ -44,8 +43,48 @@ function getMenus(req, res) {
         })
 }
 
+function updateMenu(req,res){
+    const { title, url, ordinal, active } = req.body;
+    const query = { title: title };
+    const params = req.params;
+    if(!title){
+        res.status(404).send({ message: "El titulo es requerido" });
+    }else{
+        Menu.findByIdAndUpdate({ _id: params.id }, {
+            title: title,
+            url: url,
+            ordinal: ordinal,
+            active: active
+        }, (err, menuUpdate) => {
+            if (err) {
+                res.status(500).send({ message: "Error del servidor." });
+            } else {
+                if (!menuUpdate) {
+                    res.status(404)
+                        .send({ message: "No se ha encontrado ningun menu" });
+                } else {
+                    res.status(200).send({ message: "menu actualizado correctamente" })
+                }
+            }
+        })
+       /* Menu.findOneAndUpdate(query, {
+            title: title,
+            url: url,
+            ordinal: ordinal,
+            active: active
+        }).then(menu => {
+            console.log(menu);
+            if (!menu) {
+                res.status(404).send({ message: "No se ha encontrado ningun menu" });
+            } else {
+                res.status(200).send({ menu });
+            }
+        })*/
+    }
+}
 
 module.exports = {
     addMenu,
-    getMenus
+    getMenus,
+    updateMenu
 };

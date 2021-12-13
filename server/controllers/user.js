@@ -204,6 +204,7 @@ function getAvatar(req, res) {
 function updateUser(req, res) {
 
     let userData = req.body;
+    console.log(userData);
     userData.email = req.body.email.toLowerCase();
     const params = req.params;
     if (userData.password) {
