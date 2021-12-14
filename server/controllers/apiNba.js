@@ -7,14 +7,11 @@ const path = require("path");
 const {players} = require("../data/players");
 
 function getTeam(req, res) {
-  nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
-        //console.log(teams);
+/*  nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
         if (!teams) {
             res.status(404).send({ message: "No se ha encontrado ningun equipo." });
         } else {
-            console.log('INICIO');
             teams.forEach(e => {
-                console.log('/****//' + e);
                 const team = new Team();
                 team.teamName = e.teamName
                 team.teamId = e.teamId
@@ -28,9 +25,38 @@ function getTeam(req, res) {
                     }
                 });
             });
-            console.log('FIN');
             res.status(200).send(teams);
             
+        }
+    });*/
+
+    function asignoConferencia(teamId,e,r){
+        Team.findOne({ teamId }, (err, teamStored) => {
+            e.conference= teamStored.conference;
+            //console.log(e);
+            console.log('2');
+            r.push(e);
+        });   
+    }
+
+    function recorroRespuestaApi(teams){
+        teams.forEach(e => {
+            const teamId = e.teamId;
+            asignoConferencia(teamId,e,teams);
+            console.log('0');
+        });
+        console.log('1');
+        return teams;
+    }
+
+    nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
+        if (!teams) {
+            res.status(404).send({ message: "No se ha encontrado ningun equipo." });
+        } else {
+            let r = recorroRespuestaApi(teams);
+
+            console.log('3');
+            res.status(200).send(r);
         }
     });
 }
