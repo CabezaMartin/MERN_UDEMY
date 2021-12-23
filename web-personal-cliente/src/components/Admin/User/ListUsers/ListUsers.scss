@@ -1,0 +1,42 @@
+.list-users {
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__header-switch {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        >button {
+            margin-right: 20px;
+        }
+    }
+    &__header-btn-add-user {
+        .ant-btn-primary {
+            background: #1890ff;
+            border-color: #1890ff;
+            border-radius: 18px;
+        }
+    }
+}
+
+.users-active {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 15px;
+    .ant-list-item-meta {
+        display: flex;
+        align-items: center;
+    }
+    .ant-btn-primary {
+        background: #001529;
+        border-color: #001529;
+        border-radius: 18px;
+    }
+    .ant-btn-danger {
+        background: #001529;
+        border-color: #001529;
+        border-radius: 18px;
+    }
+}

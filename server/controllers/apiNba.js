@@ -7,6 +7,7 @@ const path = require("path");
 const {players} = require("../data/players");
 
 function getTeam(req, res) {
+    const season = req.params.season;
 /*  nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
         if (!teams) {
             res.status(404).send({ message: "No se ha encontrado ningun equipo." });
@@ -29,34 +30,54 @@ function getTeam(req, res) {
             
         }
     });*/
+  
 
-    function asignoConferencia(teamId,e,r){
-        Team.findOne({ teamId }, (err, teamStored) => {
-            e.conference= teamStored.conference;
-            //console.log(e);
-            console.log('2');
-            r.push(e);
-        });   
+      async function asignoConferencia(teamId,e){
+        return new Promise( (resolve, reject) => {
+            Team.findOne({ teamId }, (err, teamStored) => {
+                if(err){
+                     reject(err);
+                }else{
+                    e.conference= teamStored.conference;
+                    e.avatar=teamStored.avatar;
+                     resolve(e);
+                }
+            }); 
+        });
+ 
     }
 
     function recorroRespuestaApi(teams){
-        teams.forEach(e => {
-            const teamId = e.teamId;
-            asignoConferencia(teamId,e,teams);
-            console.log('0');
+        return  new Promise( async (resolve, reject) => {
+            let promesas = [];
+            let cant = 1;
+            let r = await teams.forEach(async e => {         
+                const teamId = e.teamId;
+                await asignoConferencia(teamId,e);
+                //console.log('2');
+                promesas.push(e);
+                if(cant>29){
+                    console.log(cant);
+                    return resolve(promesas);
+                }else{
+                    cant++;
+                }
+            });
+            r.then(e=>{
+                resolve(promesas);
+            })
+
         });
-        console.log('1');
-        return teams;
     }
 
-    nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
+    nba.stats.teamStats({Season:"2021-22"}).then(async teams=>{
         if (!teams) {
             res.status(404).send({ message: "No se ha encontrado ningun equipo." });
         } else {
-            let r = recorroRespuestaApi(teams);
-
-            console.log('3');
-            res.status(200).send(r);
+            recorroRespuestaApi(teams).then(r=>{
+                console.log('4');
+                res.status(200).send(r);
+            });
         }
     });
 }
