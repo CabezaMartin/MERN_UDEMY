@@ -9,6 +9,8 @@ import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminTeamsWeb from "../pages/Admin/TeamWeb";
 import PlayersTeam from "../pages/Admin/PlayersTeam";
 import LeaderTeamWeb from "../pages/Admin/LeaderTeamWeb";
+import GamesWeb from "../pages/Admin/GamesWeb";
+import StatePlayers from "../pages/Admin/StatePlayers";
 import {} from "../pages/Admin/TeamWeb"
 //pages
 import Home from "../pages/Home";
@@ -43,7 +45,7 @@ const routes = [{
             {
                 path: "/admin/teams",
                 component: AdminTeamsWeb,
-                exact: true
+                exact: true,
             },    
             {
                 path: "/admin/players",
@@ -54,14 +56,26 @@ const routes = [{
                 path:"/admin/leaders",
                 component: LeaderTeamWeb,
                 exact: true
-            },                
+            },      
+            {
+                path:"/admin/games",
+                component: GamesWeb,
+                exact: true
+            },        
+            {
+                path:"/admin/statePlayers",
+                component: StatePlayers,
+                exact: true
+            },        
             {
                 component: Error404,
             }
         ]
     },
     {
-
+        path: "/",
+        component: LayoutBasic,
+        exact: false,
         routes: [{
                 path: "/",
                 component: Home,

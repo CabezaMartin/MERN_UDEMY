@@ -4,8 +4,9 @@ import jwtDecode from 'jwt-decode';
 
 
 export function getAccessToken() {
+    
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
-    if (!accessToken || accessToken === null) {
+    if (!accessToken || accessToken === null || accessToken === "null" || accessToken==="undefined") {
         return null;
 
     }
@@ -16,6 +17,7 @@ export function getAccessToken() {
 }
 
 export function getRefreshToken() {
+    
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     if (!refreshToken || refreshToken === null) {
         return null;
@@ -28,6 +30,7 @@ export function getRefreshToken() {
 }
 
 export function refreshToken(refreshToken) {
+    
     const url = `${basePath}/${apiVersion}/refresh-access-token`;
     const bodyObj = {
         "refreshToken": refreshToken
@@ -60,12 +63,14 @@ export function refreshToken(refreshToken) {
 }
 
 export function logout() {
+    
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(REFRESH_TOKEN);
 }
 
 
 function willExpireToken(token) {
+    
     const second = 60;
     const metaToken = jwtDecode(token);
     const { exp } = metaToken;

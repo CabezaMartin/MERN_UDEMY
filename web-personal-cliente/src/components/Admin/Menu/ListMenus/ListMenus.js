@@ -1,23 +1,17 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "./ListMenus.scss";
-import { EditOutlined,StopOutlined,DeleteOutlined, CheckOutlined,UserAddOutlined    } from "@ant-design/icons";
-import { Tooltip ,  List, Button, Avatar, notification,  Modal as ModalAntd} from "antd";
+import {  UserAddOutlined    } from "@ant-design/icons";
+import {  Button, } from "antd";
 import Modal from "../../../Admin/Modal";
-import Menu from "../../../../pages/Admin/MenuWeb/MenuWeb";
-import {getMenus,addMenu} from '../../../../api/menu';
-import { getAccessToken } from "../../../../api/auth";
-import ColumnGroup from "rc-table/lib/sugar/ColumnGroup";
-import EditMenu from "../../../../components/Admin/Menu/EditMenu";
 import CreateMenuForm from "../../../../components/Admin/Menu/CreateMenu";
-const {confirm} = ModalAntd;
 
 export default function ListMenus(props) {
   const [modalCollapsed, setmodalCollapsed] = useState(false);  
   const [modalTitle, setModalTitle] =  useState("");
   const [modalContent, setModalContent] =  useState(null);  
-  const {menus,setReloadMenus} = props;
+  const {setReloadMenus} = props;
   //console.log("MENUS::::"+ JSON.stringify(menus));
-  const token = getAccessToken();
+  //const token = getAccessToken();
   
   const createMenu = () =>{
     //console.log('MENU!¡!¡!¡!');
@@ -28,14 +22,14 @@ export default function ListMenus(props) {
       setReloadMenus={setReloadMenus}
       />);
   }
-  const editMenu = menu =>{
+/*  const editMenu = menu =>{
     console.log("1."+menu);
     setmodalCollapsed(!modalCollapsed)
     setModalTitle(`Editar ${menu.title ? menu.title : '...'}`);
     setModalContent(<EditMenu menu={menu}
        setmodalCollapsed={setmodalCollapsed}
        setReloadMenus={setReloadMenus}/>);
-}
+}*/
   return (
 
     <div className="list-menus">
@@ -50,11 +44,51 @@ export default function ListMenus(props) {
             </Button>
           </div>        
       </div>
-      <MenuItems 
-            menus={menus} 
-            setReloadMenus = {setReloadMenus}
-            editMenu={editMenu}
-        />
+      <div>
+            <h1>Estamos en Admin.</h1>
+            <h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>            
+        </div>
       <Modal
         title={modalTitle}
         isVisible={modalCollapsed}
@@ -66,10 +100,8 @@ export default function ListMenus(props) {
   );
 }
 
-function MenuItems(props) {
-  const { menus,setReloadMenus,editMenu} = props;
-    const token = getAccessToken();
-
+/*function MenuItems(props) {
+  const { menus,editMenu} = props;
    
   return (
     <List
@@ -83,9 +115,9 @@ function MenuItems(props) {
     />}
     />
   );
-}
+}*/
 
-function MenuItem(props){
+/*function MenuItem(props){
   const {menu,editMenu} = props;
 
   return(
@@ -122,4 +154,4 @@ function MenuItem(props){
     />
   </List.Item>
   );
-}
+}*/

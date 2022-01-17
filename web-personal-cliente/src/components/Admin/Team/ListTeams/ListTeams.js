@@ -6,7 +6,7 @@ import Modal from "../../../Admin/Modal";
 import {getLogoApi} from '../../../../api/team';
 import { getAccessToken } from "../../../../api/auth";
 import EditTeam from "../../../../components/Admin/Team/EditTeam";
-import ListPlayers from "../../Player/ListPlayers";
+//import ListPlayers from "../../Player/ListPlayers";
 import {Link} from 'react-router-dom';
 const {confirm} = ModalAntd;
 
@@ -32,6 +32,7 @@ export default function ListTeams(props) {
 
 const showPlayers = team =>{
   console.log(team);
+ // <Link to={"/players"}></Link>
 }
 
   return (
@@ -93,12 +94,16 @@ function TeamItem(props){
     <List.Item
     actions={[
       <Tooltip title="Jugadores">
-      <Button
-        type="primary"
-        onClick={() => showPlayers(team)}
-      >
-        <TeamOutlined  />
-      </Button>
+        <Link to={{pathname:"/admin/players", state:"hola"}}  >
+          <Button
+            type="primary"
+            //onClick={() => showPlayers(team)}
+            //href="players" 
+            >
+            <TeamOutlined  />          
+          </Button>
+        </Link>
+
       </Tooltip>,      
       <Tooltip title="Editar">
       <Button

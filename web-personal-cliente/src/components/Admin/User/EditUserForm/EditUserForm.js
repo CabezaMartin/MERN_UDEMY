@@ -35,7 +35,7 @@ export default function EditUserForm(props) {
     avatar: user.avatar,
   });
 
-  const cleanInput = () => {
+/*  const cleanInput = () => {
     setUserData({
       name: "",
       lastName: "",
@@ -43,7 +43,7 @@ export default function EditUserForm(props) {
       role: "",
       avatar: "",
     });
-  };
+  };*/
   useEffect(() => {
     setUserData({
       name: user.name,

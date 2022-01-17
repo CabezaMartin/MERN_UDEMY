@@ -5,7 +5,7 @@ import { AuthProvider } from "./providers/AuthProvider"
 
 import "./App.scss";
 function App() {
- // debugger;
+ console.log(routes);
   return (
     <AuthProvider>
       <Router>
@@ -20,8 +20,8 @@ function App() {
 }
 
 function RouteWithSubRoutes(route){
-  //console.log(route);
- // debugger;
+  console.log(route);
+ 
   return (
     <Route
       path = {route.path}

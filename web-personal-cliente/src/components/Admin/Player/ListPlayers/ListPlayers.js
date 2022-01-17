@@ -1,15 +1,11 @@
 import React, { useState,useEffect } from "react";
 import "./ListPlayers.scss";
-import { EditOutlined,TeamOutlined } from "@ant-design/icons";
-import { Tooltip ,  List, Button, Avatar, Select, notification,  Modal as ModalAntd} from "antd";
+import { TeamOutlined } from "@ant-design/icons";
+import { Tooltip ,  List, Button,  Select} from "antd";
 import Modal from "../../../Admin/Modal";
-//import Menu from "../../../../pages/Admin/MenuWeb/MenuWeb";
-import {getTeam,getPlayersTeam} from '../../../../api/team';
+import {getPlayersTeam} from '../../../../api/team';
 import { getAccessToken } from "../../../../api/auth";
-//import ColumnGroup from "rc-table/lib/sugar/ColumnGroup";
 import ShowState from "../../../../components/Admin/Player/ShowState";
-//import CreateMenuForm from "../../../../components/Admin/Menu/CreateMenu";
-const {confirm} = ModalAntd;
 
 export default function ListPlayers(props) {
   const {teams} = props;
@@ -23,20 +19,25 @@ export default function ListPlayers(props) {
   const token = getAccessToken();
   const { Option } = Select;
 
+  
   useEffect(()=>{
   
-  if(teams.length>0){
-    const aux = [];
-    teams.forEach(e => {
-      aux.push(<Option value={e.teamId}>{e.teamName}</Option>);
-    });
-    setTeamData(aux);
-    console.log('raaarrrr'+JSON.stringify(teamData));
+  if(teams){
+    if(teams.length>0){
+      const aux = [];
+      teams.forEach(e => {
+        aux.push(<Option value={e.teamId}>{e.teamName}</Option>);
+      });
+      setTeamData(aux);
+      //console.log('raaarrrr'+JSON.stringify(teamData));
+    }
   }
+
 },[teams]);
 
 useEffect(()=>{  
   console.log(players);
+  console.log(playersReload);
 },[setPlayersReload]);
 
 
@@ -51,11 +52,13 @@ const showPlayers = player =>{
 
 const playersTeam = e =>{
   setTeamId(e);
-  getPlayersTeam(token,e).then(r=>{
-    //console.log(players);
-    setPlayers(r);
-    setPlayersReload(true);
-  });
+ // if(teamId){
+    getPlayersTeam(token,teamId).then(r=>{
+      //console.log(players);
+      setPlayers(r);
+      setPlayersReload(true);
+    });
+//  }
 }
 
   return (
@@ -74,7 +77,7 @@ const playersTeam = e =>{
       </div>      
       <PlayersItem 
             players={players} 
-            setPlayersReload = {setPlayersReload}
+            //setPlayersReload = {setPlayersReload}
             showPlayers={showPlayers}
         />
       <Modal
@@ -89,10 +92,8 @@ const playersTeam = e =>{
 }
 
 function PlayersItem(props) {
-  const { players,setPlayersReload,showPlayers} = props;
-    const token = getAccessToken();
-
-   
+  const { players/*,setPlayersReload*/,showPlayers} = props;
+  
   return (
     <List
       className="users-active"
@@ -109,9 +110,6 @@ function PlayersItem(props) {
 
 function PlayerItem(props){
   const {player,showPlayers} = props;
-
- // const [avatar, setAvatar] = useState(null);
-
   return(
     <List.Item
     actions={[
@@ -126,7 +124,6 @@ function PlayerItem(props){
     ]}
   >
     <List.Item.Meta
-      //avatar={<Avatar src={avatar} />}
       title={`
                       ${player.firstName} ${player.lastName}
                   `}

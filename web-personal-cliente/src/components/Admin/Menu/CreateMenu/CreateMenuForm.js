@@ -8,13 +8,13 @@ import {
   Col,
   notification
 } from "antd";
-import { UserOutlined, IeOutlined,FieldBinaryOutlined,FontSizeOutlined } from "@ant-design/icons";
+import {  IeOutlined,FieldBinaryOutlined,FontSizeOutlined } from "@ant-design/icons";
 import {
   addMenu
 } from "../../../../api/menu";
 import { getAccessToken } from "../../../../api/auth";
 import "./CreateMenuForm.scss";
-import ColumnGroup from "rc-table/lib/sugar/ColumnGroup";
+
 
 export default function CreateMenuForm(props){
     const {setmodalCollapsed,setReloadMenus} = props;

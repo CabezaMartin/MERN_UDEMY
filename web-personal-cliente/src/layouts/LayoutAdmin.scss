@@ -12,7 +12,12 @@
     }
     &__content {
         min-height: calc(100vh - 65px);
-        padding: 90px 25px 25px 25px;
+        padding: 10px 25px 25px 25px;
+        overflow: auto;
+        height: 100vh;
+        position: fixed;
+        top: 65px;
+        width: 85%!important;
     }
     &__footer {
         padding: 20px;

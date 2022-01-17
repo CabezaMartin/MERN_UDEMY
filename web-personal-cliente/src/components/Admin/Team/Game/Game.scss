@@ -8,6 +8,13 @@
         /*.ant-select:not(.ant-select-customize-input) .ant-select-selector {
             position: unset!important;
         }*/
+
+    }
+    .ant-card-body {
+        padding: 8px!important;
+    }    
+    .ant-list-item {
+        padding: 0px!important;
     }
     &__header-btn-add-user {
         .ant-btn-primary {
@@ -41,6 +48,10 @@
         }
 
     }
+    &__descriptions {
+        display: flex;
+    }
+
    /* .ant-spin-container {
         position: unset!important;
     }
@@ -59,24 +70,30 @@
     .ant-avatar-image {
         position: unset!important;
     }    */
+    &__list{
+            width: 300
+    }
 }
 
-.users-active {
-    background-color: #fff;
-    padding: 10px 20px;
-    border-radius: 15px;
-    .ant-list-item-meta {
-        display: flex;
-        align-items: center;
+.descriptionPts {
+    display: flex;
+    margin: 2px;
+    >b{
+        width: 50%!important;
+        text-align: end;
+        margin: 10px;
     }
-    .ant-btn-primary {
-        background: #001529;
-        border-color: #001529;
-        border-radius: 18px;
+    >div {
+        >img{
+            width: 35px;
+            max-height: 35px;
+        }
     }
-    .ant-btn-danger {
-        background: #001529;
-        border-color: #001529;
-        border-radius: 18px;
-    }
+
+}
+
+.cardScore{
+    margin: 5px;
+    width: 300px;
+    height: 240px;
 }

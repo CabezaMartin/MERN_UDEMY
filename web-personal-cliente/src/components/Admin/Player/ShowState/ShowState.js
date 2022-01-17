@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Descriptions , Avatar,  Form,  Icon,  Input,  Select,  Button,  Row,  Col, Table ,  notification,  message,} from "antd";
-import { useDropzone } from "react-dropzone";
-import { UserOutlined, MailFilled } from "@ant-design/icons";
-import NoAvatar from "../../../../assets/img/png/no-avatar.png";
+import React, { useState, useEffect } from "react";
+import { Descriptions } from "antd";
 import {  getPlayerState} from "../../../../api/player";
-import { getAccessToken } from "../../../../api/auth";
 //import {getAvatarApi} from '../../../../api/user';
 import "./ShowState.scss";
 
 export default function ShowState(props) {
-  const { player, setmodalCollapsed,setReloadPlayer } = props;
+  const { player} = props;
   console.log(player);
-  const [avatar, setAvatar] = useState(null);
   const [playerData, setPlayerData] = useState({
     personId: player.personId,
     firstName: player.firstName,

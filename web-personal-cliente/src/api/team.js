@@ -100,8 +100,8 @@ export function getPlayersTeam(token,teamId){
 
 }
 
-export function getState(){
-    const url = `${basePath}/${apiVersion}/get-teamsApi`;
+export function getState(season){
+    const url = `${basePath}/${apiVersion}/get-teamsApi/${season}`;
     const params = {
         method: "GET",
         headers: {
@@ -117,4 +117,42 @@ export function getState(){
         }).catch(err => {
             return { ok: false, message: err.message }
         })    
+}
+export function getScoreboard(gameDate){
+    const url = `${basePath}/${apiVersion}/get-scoreboard/${gameDate}`;
+    const params = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    };
+    return fetch(url, params)
+        .then(response => {
+            return response.json();
+        })
+        .then(result => {
+            return result;
+        }).catch(err => {
+            return { ok: false, message: err.message }
+        })      
+}
+
+
+export function getBoxScore(gameId){
+    const url = `${basePath}/${apiVersion}/get-boxscore?gameId=${gameId}`;
+    const params = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    };
+    return fetch(url, params)
+        .then(response => {
+            return response.json();
+        })
+        .then(result => {
+            return result;
+        }).catch(err => {
+            return { ok: false, message: err.message }
+        })     
 }

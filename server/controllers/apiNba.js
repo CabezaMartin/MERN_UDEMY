@@ -70,7 +70,7 @@ function getTeam(req, res) {
         });
     }
 
-    nba.stats.teamStats({Season:"2021-22"}).then(async teams=>{
+    nba.stats.teamStats({Season:season}).then(async teams=>{
         if (!teams) {
             res.status(404).send({ message: "No se ha encontrado ningun equipo." });
         } else {
@@ -274,8 +274,7 @@ function getLeagueLeaders(req,res){
 }
 
 function getScores(req,res){
-    const query = req.query;
-    const gameDate = query.gameDate;
+    const gameDate = req.params.gameDate;
     nba.stats.scoreboard({gameDate: gameDate}).then(s=>{
         res.status(200).send(s);
     })

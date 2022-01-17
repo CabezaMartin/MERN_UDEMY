@@ -7,8 +7,9 @@ import "./TeamWeb.scss";
 
 export default function TeamWeb(props){
 
-    const {asd} = props;
-    //console.log(props);
+    const { routes } = props;
+    
+console.log(routes);
     const [teams,setTeams] = useState([]);
     const [reloadTeams, setReloadTeams] = useState(false);
     const token = getAccessToken();

@@ -20,7 +20,7 @@ export default function LayoutBasic(props){
     );
 }
 function LoadRoutes(props){
-    debugger;
+    
     console.log(props);
     const { routes } = props;
     console.log(routes);

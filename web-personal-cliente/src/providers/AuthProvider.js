@@ -6,14 +6,15 @@ import jwtDecode from 'jwt-decode';
 export const AuthContext = createContext();
 
 export function AuthProvider(props) {
+    
     const { children } = props;
     const [user, setUser] = useState({
         user: null,
         isLoading: true
     });
 
-    useEffect(()=>{
-        checkUserLogin(setUser);
+    useEffect(()=>{           
+            checkUserLogin(setUser);
     },[]);
 
     return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>
@@ -21,6 +22,7 @@ export function AuthProvider(props) {
 }
 
 function checkUserLogin(setUser){
+    
     const accessToken = getAccessToken();
 
     if(!accessToken){

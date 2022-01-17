@@ -8,18 +8,15 @@ import {
   Col,
   notification
 } from "antd";
-import { UserOutlined, IeOutlined,FieldBinaryOutlined,FontSizeOutlined } from "@ant-design/icons";
+import { IeOutlined,FieldBinaryOutlined,FontSizeOutlined } from "@ant-design/icons";
 import {
-  editMenuApi,
-  deleteMenu,
-  updateMenu
+  editMenuApi
 } from "../../../../api/menu";
 import { getAccessToken } from "../../../../api/auth";
 import "./EditMenuForm.scss";
-import ColumnGroup from "rc-table/lib/sugar/ColumnGroup";
 
 export default function EditMenu(props){
-    const {menu,setmodalCollapsed,setReloadMenus} = props;
+    const {menu} = props;
     const token = getAccessToken();
     const [menuData, setMenuData] = useState({
         title: menu.title,
@@ -28,15 +25,6 @@ export default function EditMenu(props){
         active: menu.active
       });    
 
-      const cleanInput = () => {
-        setMenuData({
-          title: "",
-          url: "",
-          email: "",
-          ordinal: "",
-          active: "",
-        });
-      };
       useEffect(() => {
         setMenuData({
             title: menu.title,
