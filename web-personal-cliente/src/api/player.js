@@ -1,6 +1,6 @@
 import { basePath, apiVersion } from "./config";
 
-export function getPlayerState(playerId) {
+export function getPlayerInfo(playerId) {
     const url = `${basePath}/${apiVersion}/get-player-info?playerId=${playerId}`;
     const params = {
         method: "GET",

@@ -6,7 +6,6 @@ import ListMenus from '../../../components/Admin/Menu/ListMenus';
 import "./TeamWeb.scss";
 
 export default function TeamWeb(props){
-
     const { routes } = props;
     
 console.log(routes);

@@ -1,24 +1,22 @@
-.edit-user-form {
-    .upload-avatar {
-        display: table;
-        margin: 0 auto;
-        border: 2px solid #9a9a9a;
-        border-style: dashed;
-        border-radius: 100px;
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-    .form-edit {
-        text-align: center;
-        .ant-form-item {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            i {
-                color: rgba(0, 0, 0, 0.25);
+.show-state {
+    height: 100%;
+    &__show-form{
+        padding: 5px;
+        &__info{
+            height: 50%;
+            .ant-avatar{
+                width: 80px;
+                height: 80px;
             }
         }
-        .btn-submit {
-            width: 100%;
+        &__descriptions{
+            height: 60%;
+            .ant-descriptions-row > th, .ant-descriptions-row > td {
+                padding-bottom: 16px;
+            }
+            .ant-descriptions-view table {
+                margin: 10px 0px 0px 0px;
+            }
         }
     }
-}
+}   

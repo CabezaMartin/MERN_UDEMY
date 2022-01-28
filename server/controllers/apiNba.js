@@ -8,31 +8,8 @@ const {players} = require("../data/players");
 
 function getTeam(req, res) {
     const season = req.params.season;
-/*  nba.stats.teamStats({Season:"2021-22"}).then( teams=>{
-        if (!teams) {
-            res.status(404).send({ message: "No se ha encontrado ningun equipo." });
-        } else {
-            teams.forEach(e => {
-                const team = new Team();
-                team.teamName = e.teamName
-                team.teamId = e.teamId
-                team.save((err, teamStored) => {
-                    if (err) {
-                        res.status(500).send({ message: "Error el equipo ya existe" });
-                    } else {
-                        if (!teamStored) {
-                            res.status(404).send({ message: "Error al crear el equipo" })
-                        }
-                    }
-                });
-            });
-            res.status(200).send(teams);
-            
-        }
-    });*/
-  
 
-      async function asignoConferencia(teamId,e){
+    async function asignoConferencia(teamId,e){
         return new Promise( (resolve, reject) => {
             Team.findOne({ teamId }, (err, teamStored) => {
                 if(err){
@@ -83,41 +60,23 @@ function getTeam(req, res) {
 }
 
 function getPlayers(req,res){
-    //console.log(players);
-   // nba.findPlayer('Stephen Curry').then( p=> {
-  //      console.log(p);
- /*      nba.stats.playerInfo({ PlayerID: "201939" }).then(
-            ps=>{
-                console.log(ps);
+    players.forEach(e=>{
+        const player = new Player();
+        player.playerId = e.playerId
+        player.teamId = e.teamId
+        player.firstName = e.firstName
+        player.lastName = e.lastName
+        player.save((err, playerStored) => {
+            if (err) {
+                res.status(500).send({ message: "Error el jugador ya existe" });
+            } else {
+                if (!playerStored) {
+                    res.status(404).send({ message: "Error al crear el jugador" })
+                }
             }
-        );
-        */
-    //});
-
-    /*nba.stats.playersInfo().then( players=>{ 
-        if(!players){
-            res.status(404).send({message:"Error al traer los jugadores"})
-        }else{*/
-            players.forEach(e=>{
-                const player = new Player();
-                player.playerId = e.playerId
-                player.teamId = e.teamId
-                player.firstName = e.firstName
-                player.lastName = e.lastName
-                player.save((err, playerStored) => {
-                    if (err) {
-                        res.status(500).send({ message: "Error el jugador ya existe" });
-                    } else {
-                        if (!playerStored) {
-                            res.status(404).send({ message: "Error al crear el jugador" })
-                        }
-                    }
-                });
-            })
-            res.status(200).send(players);            
-      //  }
-
-  //  })
+        });
+    })
+    res.status(200).send(players);            
 }
 
 function getTeamsDB(req, res) {
@@ -147,10 +106,8 @@ function uploadLogo(req, res) {
                 res.status(404).send({ message: "No se ha encontrado ningun equipo" });
             } else {
                 let team = teamData;
-                console.log('qqq');
                 if (req.files) {
                     let filePath = req.files.avatar.path;
-                    console.log('qqq'+filePath);
                     let fileSplit = filePath.split("\\");
                     console.log(fileSplit);
                     let fileName = fileSplit[2];
@@ -187,7 +144,6 @@ function uploadLogo(req, res) {
 
 
                 }
-                //console.log(req.files);
             }
         }
     })

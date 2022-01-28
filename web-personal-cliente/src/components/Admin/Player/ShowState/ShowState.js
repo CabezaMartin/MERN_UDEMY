@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Descriptions } from "antd";
-import {  getPlayerState} from "../../../../api/player";
-//import {getAvatarApi} from '../../../../api/user';
+import { Descriptions, Breadcrumb, Avatar } from "antd";
+import {  getPlayerInfo} from "../../../../api/player";
+import { Link } from "react-router-dom";
 import "./ShowState.scss";
 
 export default function ShowState(props) {
   const { player} = props;
+
   console.log(player);
   const [playerData, setPlayerData] = useState({
     personId: player.personId,
@@ -34,7 +35,7 @@ export default function ShowState(props) {
   });
 
   useEffect(() => {
-    getPlayerState(player.playerId).then(playerRes=>{
+    getPlayerInfo(player.playerId).then(playerRes=>{
       setPlayerData({
         personId: playerRes.commonPlayerInfo[0].personId,
         birthdate:playerRes.commonPlayerInfo[0].birthdate,
@@ -68,7 +69,7 @@ export default function ShowState(props) {
 
   console.log(playerData);
   return (
-    <div className="edit-user-form">
+    <div className="show-state">
       <ShowForm
         playerData={playerData}
       />
@@ -80,22 +81,43 @@ function ShowForm(props) {
   const { playerData} = props;
 
   return (
-    <Descriptions size="small" column={3}>
-      <Descriptions.Item label="Name">{playerData.firstName}</Descriptions.Item>
-      <Descriptions.Item label="LastName">{playerData.lastName}</Descriptions.Item>
-      <Descriptions.Item label="Position">{playerData.position}</Descriptions.Item>
 
-      <Descriptions.Item label="country">{playerData.country}</Descriptions.Item>
-      <Descriptions.Item label="height">{playerData.height}</Descriptions.Item>
-      <Descriptions.Item label="weight">{playerData.weight}</Descriptions.Item>     
+    <div className="show-state__show-form">
+      <Breadcrumb separator=">">
+        <Link to={{pathname:"/leaders"}}>     
+          <Breadcrumb.Item>Regular Season Standings</Breadcrumb.Item>
+        </Link>
+        <Link to={{pathname:"/players"}}>  
+          <Breadcrumb.Item>Roster</Breadcrumb.Item>    
+        </Link>      
+        <Breadcrumb.Item>Info</Breadcrumb.Item>     
+      </Breadcrumb>
+      <div className="show-state__show-form__info">
+        <div>
+          <Avatar src={`https://cdn.nba.com/headshots/nba/latest/260x190/${playerData.personId}.png`}/>
+        </div>
+        <div className="show-state__show-form__descriptions">
+          <Descriptions size="small" column={3}>
+            <Descriptions.Item label="Name">{playerData.firstName}</Descriptions.Item>
+            <Descriptions.Item label="LastName">{playerData.lastName}</Descriptions.Item>
+            <Descriptions.Item label="Position">{playerData.position}</Descriptions.Item>
 
-      <Descriptions.Item label="teamName">{playerData.teamName}</Descriptions.Item>
-      <Descriptions.Item label="jersey">{playerData.jersey}</Descriptions.Item>
-      <Descriptions.Item label="teamCity">{playerData.teamCity}</Descriptions.Item>
+            <Descriptions.Item label="country">{playerData.country}</Descriptions.Item>
+            <Descriptions.Item label="height">{playerData.height}</Descriptions.Item>
+            <Descriptions.Item label="weight">{playerData.weight}</Descriptions.Item>     
 
-      <Descriptions.Item label="pts">{playerData.pts}</Descriptions.Item>
-      <Descriptions.Item label="ast">{playerData.ast}</Descriptions.Item>
-      <Descriptions.Item label="reb">{playerData.reb}</Descriptions.Item> 
-    </Descriptions>
+            <Descriptions.Item label="teamName">{playerData.teamName}</Descriptions.Item>
+            <Descriptions.Item label="jersey">{playerData.jersey}</Descriptions.Item>
+            <Descriptions.Item label="teamCity">{playerData.teamCity}</Descriptions.Item>
+
+            <Descriptions.Item label="pts">{playerData.pts}</Descriptions.Item>
+            <Descriptions.Item label="ast">{playerData.ast}</Descriptions.Item>
+            <Descriptions.Item label="reb">{playerData.reb}</Descriptions.Item> 
+          </Descriptions>   
+        </div>
+      </div>
+
+    </div>
+
   );
 }

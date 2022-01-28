@@ -38,21 +38,6 @@ export default function LayoutAdmin(props) {
     }    
     if (user && !isLoading) {
         return(
-            /*<Layout>
-                <MenuSider menuCollapsed={menuCollapsed}/>
-                <Layout className="layout-admin" style={{marginLeft:menuCollapsed?"80px":"200px"}}>
-                    <Header className="layout-admin__header">
-                        <MenuTop 
-                            menuCollapsed={menuCollapsed} 
-                            setMenuCollapsed={setMenuCollapsed}
-                        />
-                    </Header>
-                    <Content className="layout-admin__content">
-                         <LoadRoutes routes={routes}/>
-                    </Content>
-                    <Footer className="layout-admin__footer">..Hola que haces..</Footer>
-                </Layout>
-            </Layout>*/
             <Layout>
                 <Header className="layout-admin__header">
                     <Menu theme="dark" mode="horizontal">

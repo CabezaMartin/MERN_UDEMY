@@ -5,6 +5,7 @@ import { getStatePlayersGame } from "../../../hooks/functions";
 import "./StatePlayers.scss";
 
 export default function StatePlayers(props){
+
     const { location } = props;
     const [gameId,setGameId] = useState(location.state.gameId);
     const [stateAGame,setStateAGame] = useState(null);

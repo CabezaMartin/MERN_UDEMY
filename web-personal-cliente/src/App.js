@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import routes from "./config/routes"
 import { AuthProvider } from "./providers/AuthProvider"
 
+
 import "./App.scss";
 function App() {
  console.log(routes);
@@ -27,7 +28,8 @@ function RouteWithSubRoutes(route){
       path = {route.path}
       exact = {route.exact}
       render={props=><route.component routes={route.routes} {...props}/>}
-    />
+    >
+      </Route>
   );
 }
 

@@ -1,13 +1,13 @@
 import React, { useState,useEffect } from "react";
 import "./ListPlayers.scss";
-import {Avatar,Table,Select} from "antd";
+import {Avatar,Table,Select,Breadcrumb} from "antd";
 import {} from '../../../../api/team';
+import { Link } from 'react-router-dom';
 
 export default function ListStatePlayers(props) {
   const {stateAGame,stateBGame,combo,value} = props;
   const [teamAShow,setTeamAShow] = useState(false);
   const [valueCombo,setValueCombo] = useState(value);
-  debugger;
   const { Option } = Select;
   console.log(stateAGame)
   
@@ -16,7 +16,6 @@ export default function ListStatePlayers(props) {
      title: 'PLAYER',
      dataIndex: 'PLAYER',
      render: (text,record) => {
-       //debugger;
        console.log(record)
        const l = `https://cdn.nba.com/headshots/nba/latest/260x190/${record.PLAYER_ID}.png`;
       return (
@@ -60,7 +59,6 @@ export default function ListStatePlayers(props) {
     }];
 
     function change(e){
-      debugger;
       setTeamAShow(!teamAShow)
       setValueCombo(e)
     }
@@ -71,6 +69,12 @@ export default function ListStatePlayers(props) {
           <div className="list-teams">
           <div className="list-teams__header">
             <div className="list-teams__header-switch">
+            <Breadcrumb separator=">">
+              <Link to={{pathname:"/games"}}>     
+                <Breadcrumb.Item>Result</Breadcrumb.Item>
+              </Link>
+              <Breadcrumb.Item>Player state</Breadcrumb.Item>              
+            </Breadcrumb>
                 <Select
                     placeholder="Equipo"
                     onChange={e=>change(e)}
@@ -80,7 +84,7 @@ export default function ListStatePlayers(props) {
                     <Option value={combo[1].teamId}>{combo[1].teamName}</Option>
                 </Select>
                 <span>
-                  {"Clasificacion"}
+                  {"...Equipo..."}
                 </span>          
             </div>
           </div>
@@ -97,7 +101,6 @@ export default function ListStatePlayers(props) {
 
 function StatePlayers(props){
   const { state,columns } = props;
-  //debugger;
    return (
     <Table columns={columns} dataSource={state} pagination={{ position:["none"],showTitle:false,defaultPageSize: 15}}/>
    );

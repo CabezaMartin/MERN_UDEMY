@@ -1,3 +1,6 @@
+import {getPlayersState} from "../api/team";
+import {getPlayerInfo} from "../api/player";
+
 
 
 export default function getScoreboardParse(response){
@@ -98,4 +101,72 @@ export function getStatePlayersGame(response){
     return res;
 }
 
+export function getPlayerStateAux(response){
+    return  new Promise( async (resolve, reject) => {
 
+        let playersRet = [];
+        let playerInfo = {};
+        if(response){
+            let r = await response.forEach(async e=>{
+
+                await callPlayerState(e.playerId,playerInfo);
+
+                playersRet.push(playerInfo);
+                playerInfo = {};
+            });
+
+            r.then(e=>{
+                resolve(playersRet);
+            })
+        }else{
+            return playersRet;
+        }
+
+    });
+
+}
+
+
+async function callPlayerState(p,playerInfo){
+    return new Promise( async (resolve, reject) => {
+            await getPlayerInfo(p).then(playerRes=>{
+            playerInfo.personId = playerRes.commonPlayerInfo[0].personId
+            playerInfo.firstName = playerRes.commonPlayerInfo[0].firstName
+            playerInfo.lastName = playerRes.commonPlayerInfo[0].lastName
+            playerInfo.birthdate =playerRes.commonPlayerInfo[0].birthdate
+            playerInfo.school = playerRes.commonPlayerInfo[0].school
+            playerInfo.country = playerRes.commonPlayerInfo[0].country
+            playerInfo.height = playerRes.commonPlayerInfo[0].height
+            playerInfo.weight = playerRes.commonPlayerInfo[0].weight
+            playerInfo.seasonExp = playerRes.commonPlayerInfo[0].seasonExp
+            playerInfo.jersey = playerRes.commonPlayerInfo[0].jersey
+            playerInfo.position = playerRes.commonPlayerInfo[0].position
+            playerInfo.teamId = playerRes.commonPlayerInfo[0].teamId
+            playerInfo.teamName = playerRes.commonPlayerInfo[0].teamName
+            playerInfo.teamCity = playerRes.commonPlayerInfo[0].teamCity
+            playerInfo.fromYear = playerRes.commonPlayerInfo[0].fromYear
+            playerInfo.toYear = playerRes.commonPlayerInfo[0].toYear
+            playerInfo.draftYear = playerRes.commonPlayerInfo[0].draftYear
+            playerInfo.draftRound = playerRes.commonPlayerInfo[0].draftRound
+            playerInfo.draftNumber = playerRes.commonPlayerInfo[0].draftNumber
+            playerInfo.pts = playerRes.commonPlayerInfo[0].pts
+            playerInfo.ast = playerRes.commonPlayerInfo[0].ast
+            playerInfo.reb = playerRes.commonPlayerInfo[0].reb
+            playerInfo.pie = playerRes.commonPlayerInfo[0].pie     
+
+            resolve(playerInfo);             
+        });  
+    });    
+}
+
+export async function getPlayerState(teamId){
+    const respuesta = [];
+    await getPlayersState().then(res=>{
+        res.leagueDashPlayerStats.forEach(e=>{
+            if(e.teamId===teamId){
+                respuesta.push(e);
+            }
+        });
+    })
+    return respuesta;
+}

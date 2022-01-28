@@ -16,6 +16,7 @@ export default function Game(props) {
   useEffect(()=>{    
     if(date){
       getScoreboard(date).then(response=>{
+        debugger;
         let f = getScoreboardParse(response);
         setScoreBoard(f);
       });
@@ -51,26 +52,9 @@ export default function Game(props) {
 
   );  
 }
-
-/*function SocreSpace(props){
-  const { s } = props;
-   return (
-    <Space direction="vertical">
-      <Card style={{ width: 300 }}> 
-      <List.Item >
-        <List.Item.Meta
-          title={`
-                          ${s.gameId ? s.gameId : ".."}
-                      `}
-          description={`${s.teamAbbreviationTeamA}  ${s.ptsTeamA?s.ptsTeamA:"..."}  -- ${s.teamAbbreviationTeamB} ${s.ptsTeamB?s.ptsTeamB:"..."}`}
-        />
-    </List.Item>
-    </Card>
-  </Space>
-   );
-}*/
 function SocreSpace(props){
   const { s } = props;
+  debugger;
    return (
     <Space direction="vertical" size="large" align="center">
       <Card className="cardScore" title={`${s.teamAbbreviationTeamA} - ${s.teamAbbreviationTeamB}`}> 
@@ -90,24 +74,8 @@ function SocreSpace(props){
   </Space>
    );
 }
-
-/*function boxScore(gameId){
-/*  getBoxScore(gameId).then(res=>{
-    
-    console.log(res);
-  })
-  <Link to={{pathname:"/admin/statePlayers", state:"hola"}}  >
-    <Button
-      type="primary"
-      //onClick={() => showPlayers(team)}
-      //href="players" 
-      >
-      <TeamOutlined  />          
-    </Button>
-  </Link>
-}*/
-
 function Description(props){
+  debugger;
   const {
     teamWinsLossesTeamB,
     teamWinsLossesTeamA,
@@ -132,18 +100,15 @@ function Description(props){
         <b>{ptsTeamB}</b>
       </div>
       <div>
-      <Link to={{pathname:"/admin/statePlayers", state:{gameId}}}  >        
-            <Button type="link">
-              boxscore
-            </Button>
-          </Link>
+        {ptsTeamA? (
+                    <Link to={{pathname:"/statePlayers", state:{gameId}}}>        
+                    <Button type="link">
+                      boxscore
+                    </Button>
+              </Link>
+        ):("")     
+        }
       </div>
     </div>
   )
 }
-
-/*        <Link to={{pathname:"/admin/players", state:"hola"}}  >
-          <Button type="link">
-            boxscore
-          </Button>
-        </Link>*/

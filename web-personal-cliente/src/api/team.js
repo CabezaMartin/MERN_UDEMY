@@ -5,8 +5,7 @@ export function getTeam(token) {
     const params = {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            "authorization": token
+            "Content-Type": "application/json"
         }
     };
     return fetch(url, params)
@@ -79,13 +78,12 @@ export function updateTeamApi(token, teamData, teamId){
     })
 }
 
-export function getPlayersTeam(token,teamId){
+export function getPlayersTeam(teamId){
     const url = `${basePath}/${apiVersion}/get-players-team?teamId=${teamId}`;
     const params = {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            "authorization": token
+            "Content-Type": "application/json"
         }
     };
     return fetch(url, params)
@@ -136,8 +134,6 @@ export function getScoreboard(gameDate){
             return { ok: false, message: err.message }
         })      
 }
-
-
 export function getBoxScore(gameId){
     const url = `${basePath}/${apiVersion}/get-boxscore?gameId=${gameId}`;
     const params = {
@@ -155,4 +151,23 @@ export function getBoxScore(gameId){
         }).catch(err => {
             return { ok: false, message: err.message }
         })     
+}
+export function getPlayersState(){
+    const url = `${basePath}/${apiVersion}/get-players-state`;
+    const params = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    return fetch(url, params)
+        .then(response => {
+            return response.json();
+        })
+        .then(result => {
+            return result;
+        }).catch(err => {
+            return { ok: false, message: err.message }
+        })
+
 }

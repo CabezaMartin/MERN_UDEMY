@@ -1,10 +1,11 @@
 import React, { useState,useEffect } from "react";
 import "./LeaderTeam.scss";
-import { EditOutlined,TeamOutlined } from "@ant-design/icons";
+//import { EditOutlined,TeamOutlined } from "@ant-design/icons";
 import { Table ,  List, Avatar, Select,  Switch } from "antd";
-import {getLogoApi} from '../../../../api/team';
-import NoAvatar from "../../../../assets/img/png/no-avatar.png";
-import { getAccessToken } from "../../../../api/auth";
+//import {getLogoApi} from '../../../../api/team';
+//import NoAvatar from "../../../../assets/img/png/no-avatar.png";
+//import { getAccessToken } from "../../../../api/auth";
+import { Link } from 'react-router-dom';
 import { getState } from "../../../../api/team";
 
 export default function LeaderTeam(props) {
@@ -13,9 +14,9 @@ export default function LeaderTeam(props) {
   const [reloadTeams,setReloadTeams] = useState(false);
   const [comoValue,setComboValue] = useState("east");
   const [viewTeamsEast,setViewEastWest] = useState(true);
-  const [avatar, setAvatar] = useState(null);
+
   const { Option } = Select;
-  const token = getAccessToken();
+
   const [season,setSeason]=useState("2021-22");
   const columns = [
     {
@@ -27,12 +28,14 @@ export default function LeaderTeam(props) {
       return (
        //`http://localhost:3977/api/v1/get-logo/ ${record.avatar}`
        
-       <div>
-        <Avatar src={l}/>
-         <div>
-          <div>{record.teamName}</div>
+      <div>
+        <Link to={{pathname:"/players", state:{record}}}>
+          <Avatar src={l}/>
+          <div>
+            <div>{record.teamName}</div>
           </div>
-       </div>
+        </Link>
+      </div>
      );},     
     },
     {
@@ -82,7 +85,6 @@ export default function LeaderTeam(props) {
       team.forEach(element => {
           if(element.conference==="west"){
               teamWest.push(element);
-              console.log('1b');
           }
       });
       teamWest.sort((a,b)=>{return b.wPct - a.wPct;})

@@ -8,9 +8,10 @@ import ListTeams from '../../../components/Admin/Team/ListTeams';
 import "./PlayersTeam.scss";
 
 export default function PlayersTeam(props){
-    //debugger;
-    const {location}=props;
+    const {location, history}=props;
+    
     const locState = location.state;
+    const teamId = locState ? locState.record.teamId : '';
     const [teams,setTeams] = useState([]);
     const [reloadTeams, setReloadTeams] = useState(false);
     const token = getAccessToken();
@@ -29,6 +30,7 @@ export default function PlayersTeam(props){
             <ListPlayers
                 teams={teams}
                 setReloadTeams={setReloadTeams}
+                teamIdLocation={teamId}
            />
         </div>
     );
